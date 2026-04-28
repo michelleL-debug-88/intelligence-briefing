@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intelligence Briefing — 2026-04-27</title>
+  <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 Helvetica, Arial, sans-serif;
+    background: #f8f9fb;
+    color: #1a1d23;
+    min-height: 100vh;
+  }
+
+  .site-header {
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 20px 32px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .site-header h1 { font-size: 1.25rem; font-weight: 700; color: #111827; }
+  .site-header .date-badge {
+    font-size: 0.8rem; color: #6b7280;
+    background: #f3f4f6; padding: 3px 10px; border-radius: 20px;
+  }
+  .site-header .free-badge {
+    font-size: 0.72rem; color: #10b981;
+    background: #d1fae5; padding: 3px 10px; border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .tab-nav {
+    display: flex; gap: 2px;
+    background: #fff; border-bottom: 1px solid #e5e7eb;
+    padding: 0 32px;
+  }
+  .tab-btn {
+    padding: 14px 20px; font-size: 0.875rem; font-weight: 500;
+    color: #6b7280; background: none; border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer; transition: color .15s, border-color .15s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: #374151; }
+  .tab-btn.active { color: #4f46e5; border-bottom-color: #4f46e5; }
+
+  .tab-content { display: none; padding: 28px 32px 48px; }
+  .tab-content.active { display: block; }
+
+  .feed-header { margin-bottom: 16px; }
+  .last-updated { font-size: 0.78rem; color: #9ca3af; }
+
+  .filter-bar {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    margin-bottom: 24px; padding: 14px 16px;
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
+  }
+  .filter-label { font-size: 0.78rem; font-weight: 600; color: #6b7280; margin-right: 4px; }
+  .filter-btn {
+    padding: 5px 14px; font-size: 0.78rem; font-weight: 500;
+    border-radius: 20px; border: 1px solid #d1d5db;
+    background: #f9fafb; color: #374151;
+    cursor: pointer; transition: all .15s;
+  }
+  .filter-btn.active {
+    background: var(--btn-color, #4f46e5);
+    border-color: var(--btn-color, #4f46e5);
+    color: #fff;
+  }
+  .all-btn { --btn-color: #374151; }
+  .filter-btn:not(.active):hover { background: #f3f4f6; }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+  }
+  .card-grid > div { display: contents; }
+
+  .card {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
+    padding: 18px 20px 16px;
+    display: flex; flex-direction: column; gap: 8px;
+    transition: box-shadow .15s, border-color .15s;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); border-color: #d1d5db; }
+
+  .card-meta { font-size: 0.74rem; color: #9ca3af; font-weight: 500; }
+  .card-headline { font-size: 0.95rem; font-weight: 600; line-height: 1.4; }
+  .card-headline a { color: #111827; text-decoration: none; }
+  .card-headline a:hover { color: #4f46e5; text-decoration: underline; }
+  .card-summary { font-size: 0.84rem; color: #4b5563; line-height: 1.6; flex: 1; }
+  .card-footer { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+  .badge, .company-pill {
+    display: inline-block; font-size: 0.7rem; font-weight: 600;
+    padding: 3px 9px; border-radius: 20px;
+    text-transform: lowercase; letter-spacing: 0.01em;
+  }
+
+  .empty-feed {
+    padding: 48px 32px; text-align: center;
+    color: #9ca3af; font-size: 0.9rem; line-height: 2;
+  }
+
+  .card-hidden { display: none !important; }
+
+  @media (max-width: 600px) {
+    .site-header, .tab-nav, .tab-content { padding-left: 16px; padding-right: 16px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .tab-btn { padding: 12px 12px; font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>Intelligence Briefing</h1>
+  <span class="date-badge">2026-04-27</span>
+  <span class="free-badge">free &amp; open</span>
+</header>
+
+<nav class="tab-nav">
+<button class="tab-btn active" data-tab="feed1">★ AI Tech</button>
+<button class="tab-btn" data-tab="feed2">★ Drug Discovery</button>
+<button class="tab-btn" data-tab="feed3">★ Key Accounts</button>
+</nav>
+
+<section id="feed1" class="tab-content active">
+    <div class="feed-header"><p class="last-updated">Last updated: 2026-04-27 20:58</p></div>
+    <div class="card-grid">
+    <article class="card">
+      <div class="card-meta">OpenAI&nbsp;·&nbsp;2026-04-27</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMibkFVX3lxTFBIWjFhTVJJSG5kRU9TX3pSTEw5Ylg0RHBDR01RbzBQMnltTjFQcHRmSW9Cemlob1dRaVR4djI0NEJjYVBlS3dzRzVNYmNIb25VWU53UnBWeFVPVlJ1bFlFVGQwQno3TjEtR0hybWNR?oc=5" target="_blank" rel="noopener noreferrer">The next phase of the Microsoft OpenAI partnership</a>
+      </h3>
+      <p class="card-summary">The next phase of the Microsoft OpenAI partnership  OpenAI</p>
+      <div class="card-footer"><span class="badge" style="background:#0ea5e920;color:#0ea5e9;border:1px solid #0ea5e940">partnership</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">OpenAI&nbsp;·&nbsp;2026-04-27</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE5DMkVjb0o3N2c4R1Rhb0NsODJlREpJTGdmY3k4N2FlWWIyQmR1QzM1RVppNm45ZWxFQ1BVaUVPSE5IV2hEUXc?oc=5" target="_blank" rel="noopener noreferrer">Choco automates food distribution with AI agents</a>
+      </h3>
+      <p class="card-summary">Choco automates food distribution with AI agents  OpenAI</p>
+      <div class="card-footer"><span class="badge" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">other</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">Reuters&nbsp;·&nbsp;2026-04-27</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxONWJqVk9uV3RUa0tsclVNMjc5WFQ3SW9ZUC1MbXdKOVY3clg0aUU4QnhOYlJzRUJGcldaLVF3ZU8wZXgxVWlwQ2l6ckdZOWM3QnFoTXRkOGEzZ0E4LUhZNW1uVXF0bUpHYnM1Sl9rWTRLSWNEZjl3RXdUZ2dQeFpSMU9obmZjbzZMOUctaXRUSjdrZFpGS2pxWEhHM2dvekUtdG9KdktB?oc=5" target="_blank" rel="noopener noreferrer">Microsoft, OpenAI change terms of deal so startup can court Amazon and others</a>
+      </h3>
+      <p class="card-summary">Microsoft, OpenAI change terms of deal so startup can court Amazon and others  Reuters</p>
+      <div class="card-footer"><span class="badge" style="background:#0ea5e920;color:#0ea5e9;border:1px solid #0ea5e940">partnership</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">Microsoft Source&nbsp;·&nbsp;2026-04-27</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxPaUx3SFdlUlpFVTFHcGd1RXJVZFZMSnJkOVhnQUpvLTJid2l6dEZNb3kwOUJ1bTRGbXd3WG1zM0lwTkRqVkFqM0dXQkpJRWgyOXA3elV4SzVfcmxUaXlfYUdxeWpFRWpVY3dIS05UZ2pOUzkzcV9zQUdRRVQ0MjFqXzItd0k5Qm4zRnNTNVIzVE9DUUs3aFktNURMclhsS0RSZDA1WmEwZGVKeTY3ZVBfRUx6eUNscElOdVc4b0dSQkJkNTI0Ump0MDJIb0RTZw?oc=5" target="_blank" rel="noopener noreferrer">Accenture is rolling out Copilot to a workforce the size of Denver. Here’s how they’re doing it.</a>
+      </h3>
+      <p class="card-summary">Accenture is rolling out Copilot to a workforce the size of Denver. Here’s how they’re doing it.  Microsoft Source</p>
+      <div class="card-footer"><span class="badge" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">other</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">The New York Times&nbsp;·&nbsp;2026-04-27</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxPVlVnRWhQek1BMzRVVjVzODROT3lWWjZUczM5Tm1VMTdiUlRCeTFYbFdUbThFbi1tUmQyVHljc01rY0lZVFV2Q3dDTjMzV3lsMnZFTGNDNU5KRVp1emI2QVRiOUU5Q1YyUlZfSElqWVd5RWRuZXNfTjFrbU10UGVpaUl2UGZlZw?oc=5" target="_blank" rel="noopener noreferrer">Microsoft and OpenAI Loosen Their Partnership</a>
+      </h3>
+      <p class="card-summary">Microsoft and OpenAI Loosen Their Partnership  The New York Times</p>
+      <div class="card-footer"><span class="badge" style="background:#0ea5e920;color:#0ea5e9;border:1px solid #0ea5e940">partnership</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">Microsoft&nbsp;·&nbsp;2026-04-27</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMi7gFBVV95cUxNWnBOb1NHR213RmRvR3JmOVZocERyRDlUWS1NaV9aRkI5a0x5dG5SX0lNTkNmWHFxcVFQaXBxeFIyV0MyNGJoa0pJTzdrV3NNd1JKemljWk44X1JaVlRrQUZnM0lySHk1T1JLNzY5TlJjU1pxcWdZYl9yMTlpQkMwMklpc0VHT0pwYmZHSmdLdGoySGlFazBodUhMWC0yQU9KSDRqc3ZfUFJJSkVUam1yMUg0THBRR09KLUV2cndDYnhIUXp4TldMSzg3NFdES3RkQkE5T0VsQzhWRnBHZWN3QmhpRklWX0RhT0tETE53?oc=5" target="_blank" rel="noopener noreferrer">Extend AI voice support: Introducing real-time voice agents in Microsoft Copilot Studio</a>
+      </h3>
+      <p class="card-summary">Extend AI voice support: Introducing real-time voice agents in Microsoft Copilot Studio  Microsoft</p>
+      <div class="card-footer"><span class="badge" style="background:#6366f120;color:#6366f1;border:1px solid #6366f140">product launch</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">TechCrunch&nbsp;·&nbsp;2026-04-27</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxNWTlMekc0UzB4RTJpTWI1N0xMdldmVkF2Q3VWSEV4TG1OZE8zMTBiakxlekx0N0o0Z3Z3QWpqeUgzTlBnZ3VJaVkxeV80RG5Fek4xeUdDTmU1V1RYRWJrUm80aEJIMW10Q3pzR09rQkdwMVlkcmxodVY1bWdMRDRkRFpIWmdkOTVoRDV6dHRoaDkzVzB3S0xBSGVRaw?oc=5" target="_blank" rel="noopener noreferrer">OpenAI could be making a phone with AI agents replacing apps</a>
+      </h3>
+      <p class="card-summary">OpenAI could be making a phone with AI agents replacing apps  TechCrunch</p>
+      <div class="card-footer"><span class="badge" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">other</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">AP News&nbsp;·&nbsp;2026-04-27</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxPeC1wamNpNHVlc3V6cUJTRGUwZzBhdHBuN2toUFdqTUN5NE50eG1ocDdydURoMnhDNVI2UDdtekhDX0ItdmpxcV9fRGJOOUsyWTZqUURMdzNkUmN1NUtyMFh2UWJXWWRBM253SmJzb0t1U3FZVTJyd0h4QnVNU3ByVkNMSXVkdGJrVV94YzQyeThXd3JHZ1F0eWR6M3ZaVWdVTnRFSVpuay05a3ZF?oc=5" target="_blank" rel="noopener noreferrer">Elon Musk and OpenAI CEO Sam Altman head to court in high-stakes showdown over AI</a>
+      </h3>
+      <p class="card-summary">Elon Musk and OpenAI CEO Sam Altman head to court in high-stakes showdown over AI  AP News</p>
+      <div class="card-footer"><span class="badge" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">other</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">The Information&nbsp;·&nbsp;2026-04-28</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxOYUs2ZzV1V29yLXJPRzdDR3o5ZmJLejNucHJZQlVYbGIzOHd0Q0VocE1iUGozcDBzMno0UTFJTWdYUVpFS1dqbFkzQTV4OUdseUVSbWtwZzN6V0x2cFdkVkIyVEQtbDZtU0ZWbEpOZTl1cTRlZzEwTjh5TnowMi1JeFl2bFl2WF94dERpb2tkbTE4QkszcVdoUm1pS1ZYdmRVNFRYVFNDRUhUMkRzSEE?oc=5" target="_blank" rel="noopener noreferrer">Microsoft Comes Out of OpenAI Deal a Winner; Risks in AI Financing</a>
+      </h3>
+      <p class="card-summary">Microsoft Comes Out of OpenAI Deal a Winner; Risks in AI Financing  The Information</p>
+      <div class="card-footer"><span class="badge" style="background:#0ea5e920;color:#0ea5e9;border:1px solid #0ea5e940">partnership</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">The New York Times&nbsp;·&nbsp;2026-04-27</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNS2tVNGtoRE1RNjZqSmdRUFhEU180M1gxMXdCVm1jR0swYUhKckdXd2pCWVlTWEZDcWNHTm1haXFyNGtSQnFZZTZKRTNqS28zRjI3Zi0wZ09WRXVzM01NWmhYRm42OFd4V1htQ0xMR0VVZFAzY3E0YjFTTTdvYzRVQnd1dXVObWs?oc=5" target="_blank" rel="noopener noreferrer">Elon Musk and Sam Altman Bring OpenAI Trial Spectacle to Oakland</a>
+      </h3>
+      <p class="card-summary">Elon Musk and Sam Altman Bring OpenAI Trial Spectacle to Oakland  The New York Times</p>
+      <div class="card-footer"><span class="badge" style="background:#6b728020;color:#6b7280;border:1px solid #6b728040">other</span></div>
+    </article></div></section>
+<section id="feed2" class="tab-content">
+    <div class="feed-header"><p class="last-updated">Last updated: 2026-04-27 20:58</p></div>
+    <div class="card-grid">
+    <article class="card">
+      <div class="card-meta">R&amp;D World&nbsp;·&nbsp;2026-04-24</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMi4gFBVV95cUxPaVEyNlZ0Tzh2VTZTbmJfMURDbGd6emVSb3ZFZkROa1pFaXlmcXJ3U21LT0dCZVV5ejBsVTg5OTlCTi1TZXFBZERwQ0dHbUVrQ0RyODQ1aHFqZFdTMzhtY2J1b1RoaVlrUFR4NkpOMzRKVFF5ZGRNcHM0elMxNzRCd1ZNWWtKTm5tb1ZqaEc5MkVEejNaYVBmTXpPQXJkVWlrVVc5aXBycXBjQ25iNVlhZS0yQzZaUEdFUmRsZEFaS2hsMzR4VTBhdExJcWJZZkd6bWI4UWdRV3A4WXIydzhKRnlB?oc=5" target="_blank" rel="noopener noreferrer">SEQSTER CEO Ardy Arianpour on AWS Bio Discovery, fragmented health records and AI drug discovery’s missing patient layer</a>
+      </h3>
+      <p class="card-summary">SEQSTER CEO Ardy Arianpour on AWS Bio Discovery, fragmented health records and AI drug discovery’s missing patient layer  R&amp;D World</p>
+      <div class="card-footer"><span class="badge" style="background:#f59e0b20;color:#f59e0b;border:1px solid #f59e0b40">industry take</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">Yahoo Finance&nbsp;·&nbsp;2026-04-24</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxNb2c0WVNfSEs4a1UxdERON1NiLTRzLVZuQlNDYVJlakkwWUxTczN5WXF5ZXBmcWdOSnBEbWRZXzh2b1B0R1Fidm41UjZmamY4c0p1V1hTOTlURzVBUDdaUVdncDl4NE5FUUF1bXRXMkN1MTlPUDA1aDBUYVBMaEFPOERIb1U5OFNRR0hDSFFubXJmZWRmUVVJXzBvT18tZExvS2tBUkc0aHR1YTBWR1RSd2lnOTM?oc=5" target="_blank" rel="noopener noreferrer">A Look At Recursion Pharmaceuticals (RXRX) Valuation As AI Drug Discovery Progress And Earnings Expectations Gain Attention</a>
+      </h3>
+      <p class="card-summary">A Look At Recursion Pharmaceuticals (RXRX) Valuation As AI Drug Discovery Progress And Earnings Expectations Gain Attention  Yahoo Finance</p>
+      <div class="card-footer"><span class="badge" style="background:#f59e0b20;color:#f59e0b;border:1px solid #f59e0b40">industry take</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">MEXC&nbsp;·&nbsp;2026-04-22</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFBJQ0JSNTlTcVYwcWE0WUd5b2RxeVBLMjdXb3BwYzBXVDRGano4VnNlSDhHNUVzUEpaN0tELXdYenJJazU2YVZtYw?oc=5" target="_blank" rel="noopener noreferrer">AI Drug Discovery Breakthrough: 10x Science Unlocks the Protein Characterization Bottleneck with $4.8M Funding</a>
+      </h3>
+      <p class="card-summary">AI Drug Discovery Breakthrough: 10x Science Unlocks the Protein Characterization Bottleneck with $4.8M Funding  MEXC</p>
+      <div class="card-footer"><span class="badge" style="background:#10b98120;color:#10b981;border:1px solid #10b98140">funding</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">Universiteit van Amsterdam&nbsp;·&nbsp;2026-04-20</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMilwJBVV95cUxOaGdJVE9PUGFvRDhxV0JBbXN0RjhnenQ1N29WUHNOTDAwa0dwY3ZlWElScEdoSjJzUHRBVGF5S3FtS295RGZvQjRGcUxxWHdmRXRqZGpfUFlGNmZjWTFib0hxRjVmR0JFVGZNaE56U21YeW9kY2RsRE1DRXVCc05HYURXdXVqMTNXNUg2eHpVdDFyRUVLQVQxUWMzTS1SRDg2QkFTdkRlLUZVUE0zYkRXVmJEWExYN0hLMGNfaFFncGd1bVlBS3dES1lXd05FUnl4UkJ3OWRiVFh1WFFDVWs2RmRrZERSdXRMN1owV0t6aHNjMGpJc000bmw5LXIyVWJrQjE1S0tUQUdsbXFNd0NTZGJvUHVSNms?oc=5" target="_blank" rel="noopener noreferrer">Machine learning for drug development leaky blood vessels</a>
+      </h3>
+      <p class="card-summary">Machine learning for drug development leaky blood vessels  Universiteit van Amsterdam</p>
+      <div class="card-footer"><span class="badge" style="background:#f59e0b20;color:#f59e0b;border:1px solid #f59e0b40">industry take</span></div>
+    </article>
+    <article class="card">
+      <div class="card-meta">Nature&nbsp;·&nbsp;2026-04-27</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE4tTUNRRzE2NDh3RGNsa3djYm9SZ2ktNDBwMkhMRFV5Z2xiMXU4M0JNWkNwNXNMeTZEYy0yLUM2SXdSWmp6TTFhd00ta1lsc0VDd2J1R3JrWlBZUnY3UmpJ?oc=5" target="_blank" rel="noopener noreferrer">Artificial intelligence model boosts lung nodule diagnostic accuracy in clinical trial</a>
+      </h3>
+      <p class="card-summary">Artificial intelligence model boosts lung nodule diagnostic accuracy in clinical trial  Nature</p>
+      <div class="card-footer"><span class="badge" style="background:#0ea5e920;color:#0ea5e9;border:1px solid #0ea5e940">research</span></div>
+    </article></div></section>
+<section id="feed3" class="tab-content">
+    <div class="feed-header"><p class="last-updated">Last updated: 2026-04-27 20:58</p></div>
+    <div class="filter-bar">
+      <span class="filter-label">Filter by company:</span>
+      <button class="filter-btn active all-btn" data-company="__all__">All</button>
+      <button class="filter-btn active" data-company="Merck" style="--btn-color:#6366f1">Merck</button>
+<button class="filter-btn active" data-company="Sanofi" style="--btn-color:#0ea5e9">Sanofi</button>
+<button class="filter-btn active" data-company="GSK" style="--btn-color:#10b981">GSK</button>
+<button class="filter-btn active" data-company="Pfizer" style="--btn-color:#f59e0b">Pfizer</button>
+<button class="filter-btn active" data-company="Johnson &amp; Johnson" style="--btn-color:#ef4444">Johnson &amp; Johnson</button>
+<button class="filter-btn active" data-company="Roche" style="--btn-color:#8b5cf6">Roche</button>
+<button class="filter-btn active" data-company="Novartis" style="--btn-color:#ec4899">Novartis</button>
+    </div>
+    <div class="card-grid" id="feed3-grid"><div data-company="Merck">
+    <article class="card">
+      <div class="card-meta">Fierce Pharma&nbsp;·&nbsp;2026-04-22</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxNTzdwZXRGRFlEVWtKaG1oVzZLbU5vNjk5dGVTRHNlWW1jYlRxelVjTDFKUG5hUFZTN19aRXgyWUtyVHkyRm9zQXhQRmVKSkZvbzVfczlZWWYydFVTY2Y0dU5yX1NoVEJRZWdrNTcxQVMxSnVIRFNnZGxjVUlJWHlhS2xUNjVqcjhyYmRaeDBGUGlRTjBZR25FS056R1lCQQ?oc=5" target="_blank" rel="noopener noreferrer">Merck goes with Google for AI push, striking enterprise partnership worth up to $1B</a>
+      </h3>
+      <p class="card-summary">Merck goes with Google for AI push, striking enterprise partnership worth up to $1B  Fierce Pharma</p>
+      <div class="card-footer"><span class="badge" style="background:#6366f120;color:#6366f1;border:1px solid #6366f140">AI</span><span class="company-pill" style="background:#6366f115;color:#6366f1;border:1px solid #6366f130">Merck</span></div>
+    </article></div><div data-company="Merck">
+    <article class="card">
+      <div class="card-meta">The American Bazaar&nbsp;·&nbsp;2026-04-22</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxPSk5XUFJ6d2NFVkRkNGN4RlZKc3k2ZHY5d3pQdFdpRTA0ZlJmb0c0Rm9YdllHbnhTYVVFeEs0WF9oR0trY0hGZ1dHNW54Tk5ObFE0cDdkZ0gybHpTVEJrYUlkYm1WclhJaThwcHRURk9ZWWd2YkJjSW1KZFBiaW5TamREelJlc1hwUE5LMG9YNVpZeVgyY2F6N3pLckxocGNRYXhrMzNUWQ?oc=5" target="_blank" rel="noopener noreferrer">Merck and Google Cloud partner to scale AI in pharma</a>
+      </h3>
+      <p class="card-summary">Merck and Google Cloud partner to scale AI in pharma  The American Bazaar</p>
+      <div class="card-footer"><span class="badge" style="background:#6366f120;color:#6366f1;border:1px solid #6366f140">AI</span><span class="company-pill" style="background:#6366f115;color:#6366f1;border:1px solid #6366f130">Merck</span></div>
+    </article></div><div data-company="Merck">
+    <article class="card">
+      <div class="card-meta">TechTarget&nbsp;·&nbsp;2026-04-23</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxOWElNcnQxNTF4S2RWX3JlWllkb0lyN1o3VEFQamJXeGRHSk5YaV9ldFpmNWJLcHBYbnZGSm5oWnlaRFprNXVpSWx2U2QybVdwUEE3ejdZVEJidU5TSExjOU85cGNPZ25TUTBEQldiRFZzbTUtMFVGM2dDejdwVi1oQTVTam9tM0NkT2lSSUQxc3VNa3I1bjR0NnVBM1RSVzBfWlBVQkk2M0xzZnQ3c1R3cjA5TnVIWmctenRoa2l4akpSdw?oc=5" target="_blank" rel="noopener noreferrer">Merck inks $1 billion AI drug development deal with Google Cloud</a>
+      </h3>
+      <p class="card-summary">Merck inks $1 billion AI drug development deal with Google Cloud  TechTarget</p>
+      <div class="card-footer"><span class="badge" style="background:#6366f120;color:#6366f1;border:1px solid #6366f140">AI</span><span class="company-pill" style="background:#6366f115;color:#6366f1;border:1px solid #6366f130">Merck</span></div>
+    </article></div><div data-company="Sanofi">
+    <article class="card">
+      <div class="card-meta">Fierce Pharma&nbsp;·&nbsp;2026-04-23</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxOelZpVTRqYzN3UEE3eTFrc0otc0VZRi1MRGEzb0V6TlduYmExQ2NJM2k5VndVV2pnZE9hdTRmcXd6cnZ2eTRxZDgtQWlpYV8wRW14ZGVaLUFEeGp2dk5LRmdTYVp6MWt1WVBlQ1dzLVZBN0dlZTVTVmJjQnQweURkMzZvd1ZWTGlGT3FLYTVNNA?oc=5" target="_blank" rel="noopener noreferrer">With Dupixent driving growth, Sanofi touts 'vigorous defense' to extend US exclusivity</a>
+      </h3>
+      <p class="card-summary">With Dupixent driving growth, Sanofi touts 'vigorous defense' to extend US exclusivity  Fierce Pharma</p>
+      <div class="card-footer"><span class="badge" style="background:#10b98120;color:#10b981;border:1px solid #10b98140">executive</span><span class="company-pill" style="background:#0ea5e915;color:#0ea5e9;border:1px solid #0ea5e930">Sanofi</span></div>
+    </article></div><div data-company="Johnson &amp; Johnson">
+    <article class="card">
+      <div class="card-meta">New Orleans CityBusiness&nbsp;·&nbsp;2026-04-27</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNckpWMDVCd1RzVUdFcnVuVkt3T3N5d3F3amxVX21iNUdPZllnSThYTUl5aXJwM2VRdEJZdjd0MzlyTUE1Wk0tSzc2dnFVOHpwcDBHYmRtYlR2VnZzNGNXZ0tLOWpwZ3VsYlpMWnNqSXlfVi1jaFJ1RGtDeFFabFd5eVU0UHdlU2xZUW1ueEprWGNCOWRuNERLTXZuZG1INjFuTVFNWFFn?oc=5" target="_blank" rel="noopener noreferrer">J&amp;J sees AI halving the time to generate drug development leads</a>
+      </h3>
+      <p class="card-summary">J&amp;J sees AI halving the time to generate drug development leads  New Orleans CityBusiness</p>
+      <div class="card-footer"><span class="badge" style="background:#6366f120;color:#6366f1;border:1px solid #6366f140">AI</span><span class="company-pill" style="background:#ef444415;color:#ef4444;border:1px solid #ef444430">Johnson &amp; Johnson</span></div>
+    </article></div><div data-company="Johnson &amp; Johnson">
+    <article class="card">
+      <div class="card-meta">thenews.com.pk&nbsp;·&nbsp;2026-04-27</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxNMjhlbmlOVXVNSlBqMjZFcDdRWnR5THU4MklpVVdMMHZVY1lNeVZLREdtNjF3bTZ5SzN2V3FEYTR5LUU2YTBKX3p0VGxtWG1kM0NSMkxBWGZ1VVNmOGFoa0N6XzlVWm02bTVfd1NQcVhNM003NzZiRVg5VFVCWkM1cDdqeU1FaWxzYzNhZldjV2o5Qm1Nd0drVlBXNFF1WW5lR19SX255cmNjR2Ewb2dJYXNCWXA3V1E?oc=5" target="_blank" rel="noopener noreferrer">Johnson &amp; Johnson praises AI efficiency in generating drug development leads</a>
+      </h3>
+      <p class="card-summary">Johnson &amp; Johnson praises AI efficiency in generating drug development leads  thenews.com.pk</p>
+      <div class="card-footer"><span class="badge" style="background:#6366f120;color:#6366f1;border:1px solid #6366f140">AI</span><span class="company-pill" style="background:#ef444415;color:#ef4444;border:1px solid #ef444430">Johnson &amp; Johnson</span></div>
+    </article></div><div data-company="Johnson &amp; Johnson">
+    <article class="card">
+      <div class="card-meta">Yahoo Finance Singapore&nbsp;·&nbsp;2026-04-26</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxQenpXUHI5RTlhUF9nekM2SkFseTVXb3RRMVdGOGxod3lmWmhDcHdUZFA3dWE1SnZDTHJBcEJjN3JaWjRTNmZYY0Vsak12WEJkMTk0d0tYOU9NMTlBSFotcHFxSEQ2b1BYY2J4YXdCc0l1UTV6dklScVBPZEk5NlBZRU14dW9QX2M?oc=5" target="_blank" rel="noopener noreferrer">Jim Cramer Says Johnson &amp; Johnson “Has the Best Pipeline of Potential Blockbusters”</a>
+      </h3>
+      <p class="card-summary">Jim Cramer Says Johnson &amp; Johnson “Has the Best Pipeline of Potential Blockbusters”  Yahoo Finance Singapore</p>
+      <div class="card-footer"><span class="badge" style="background:#0ea5e920;color:#0ea5e9;border:1px solid #0ea5e940">pipeline</span><span class="company-pill" style="background:#ef444415;color:#ef4444;border:1px solid #ef444430">Johnson &amp; Johnson</span></div>
+    </article></div><div data-company="Roche">
+    <article class="card">
+      <div class="card-meta">Fierce Biotech&nbsp;·&nbsp;2026-04-23</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxPNVVZM21tZ21JYUlqRGVDNWktNXhVN0E2LTlwVndnTzhHNS1UV0VCNi1TZXpKZy1XNXJmLUJZeEwzWGFCdF9nbUo2MVo2UnVTcFFObW9pNHhET212bEdxYzdxLUVqMkxTX0FSWlpzaGhuc3JoaU9Femx5UVVTVE8tQ0VrZm95Q0ZReG1VVm55LTI4amRQYUMxNzN2Q2dWczd1dXg5MEVQd0VCWjY3Q2FlSG5FWHI1cWFjTVB6OQ?oc=5" target="_blank" rel="noopener noreferrer">From debt to ‘acceptable’ prices: Roche CEO lists 3 reasons for sitting out Big Pharma M&amp;A spree</a>
+      </h3>
+      <p class="card-summary">From debt to ‘acceptable’ prices: Roche CEO lists 3 reasons for sitting out Big Pharma M&amp;A spree  Fierce Biotech</p>
+      <div class="card-footer"><span class="badge" style="background:#10b98120;color:#10b981;border:1px solid #10b98140">executive</span><span class="company-pill" style="background:#8b5cf615;color:#8b5cf6;border:1px solid #8b5cf630">Roche</span></div>
+    </article></div><div data-company="Roche">
+    <article class="card">
+      <div class="card-meta">Fierce Pharma&nbsp;·&nbsp;2026-04-23</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMixAFBVV95cUxOOHlWbWpJbXByb1ZrazVvNkJrUzRIdUhHNGdHZWlFT2RSMXByT1hDM1A5S2U2TXlTLWFXTjVTUzJsb1MtcndjYkdiMmtfS0pzNk9QUklvYWR4RHdqUGI5ZEZuUllTSlctVkZmQlpKWjZsazRxZE5Lc1FqME5PdDlSR1NwRjlteWdpLURpeHg1bXlBU0kxN3JsNVdqVGppcjhkUFlmWEpVTW5VWGp4NjkySGtncllVRm1mSk1EYkY1dHFpZkZz?oc=5" target="_blank" rel="noopener noreferrer">Despite data concerns, Roche’s oral SERD can still be largest product in company history: exec</a>
+      </h3>
+      <p class="card-summary">Despite data concerns, Roche’s oral SERD can still be largest product in company history: exec  Fierce Pharma</p>
+      <div class="card-footer"><span class="badge" style="background:#0ea5e920;color:#0ea5e9;border:1px solid #0ea5e940">pipeline</span><span class="company-pill" style="background:#8b5cf615;color:#8b5cf6;border:1px solid #8b5cf630">Roche</span></div>
+    </article></div><div data-company="Roche">
+    <article class="card">
+      <div class="card-meta">msn.com&nbsp;·&nbsp;2026-04-23</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxPNTBuUTEyS2hmQms4NjlUWHVIQXRhOV83X2JwN2pxalc4SndrUklKdmk2REN5Y1pOeEZqVE1SbzVtYXN4c2NCT2dyRHJXRTNlWFJvTy00ME8xelJJN2VzckNoTEVRY2t3cG92aWY0NkFtMFk5YmNEb3pzamVlYkhyektrNEdGaEJaUEVYdFQzd0F4amVKR2VlaDhFczQwWHlIcE1qWEZpRDZxQU9xOVVnbS1B?oc=5" target="_blank" rel="noopener noreferrer">Roche CEO: Obesity drug pipeline could challenge market leaders</a>
+      </h3>
+      <p class="card-summary">Roche CEO: Obesity drug pipeline could challenge market leaders  msn.com</p>
+      <div class="card-footer"><span class="badge" style="background:#0ea5e920;color:#0ea5e9;border:1px solid #0ea5e940">pipeline</span><span class="company-pill" style="background:#8b5cf615;color:#8b5cf6;border:1px solid #8b5cf630">Roche</span></div>
+    </article></div><div data-company="Novartis">
+    <article class="card">
+      <div class="card-meta">BioSpace&nbsp;·&nbsp;2026-04-24</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTFB1N2d4NnYwN0JiU181Tm9vV0dUM1c1NWVMUHNCdlZFVmRSZXpmRFp3TnBQUVJXYnFYV1VlNVBIZXU0TzY4bE5BNTd4NGpIT21aYlZHMy1qSW1HWDFH?oc=5" target="_blank" rel="noopener noreferrer">Layoff Tracker: Tempero winding down following serious adverse event</a>
+      </h3>
+      <p class="card-summary">Layoff Tracker: Tempero winding down following serious adverse event  BioSpace</p>
+      <div class="card-footer"><span class="badge" style="background:#10b98120;color:#10b981;border:1px solid #10b98140">executive</span><span class="company-pill" style="background:#ec489915;color:#ec4899;border:1px solid #ec489930">Novartis</span></div>
+    </article></div><div data-company="Novartis">
+    <article class="card">
+      <div class="card-meta">The American Bazaar&nbsp;·&nbsp;2026-04-23</div>
+      <h3 class="card-headline">
+        <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxOR193SjBkV0ZGTXdnSUUzcEJsbFJqZmJLN1k5andMNlpkMFpuWkcySmpkYkFYVWtoNm51bkdRcGwzT2Z4dndGRnpOc1JEQ202YlVTYVhBaXRVREpKSzVPT2lPeG9IUFphXzBGTVhfYm44cmlmOUZJZnJhUHl0Wll4cTc3Q0V2dEZJZEdaM3VIUVZHQU1va2JDeURpU0xwSmNaak1j?oc=5" target="_blank" rel="noopener noreferrer">Novartis CEO Vas Narasimhan joins Anthropic board</a>
+      </h3>
+      <p class="card-summary">Novartis CEO Vas Narasimhan joins Anthropic board  The American Bazaar</p>
+      <div class="card-footer"><span class="badge" style="background:#10b98120;color:#10b981;border:1px solid #10b98140">executive</span><span class="company-pill" style="background:#ec489915;color:#ec4899;border:1px solid #ec489930">Novartis</span></div>
+    </article></div></div></section>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const company = btn.dataset.company;
+      if (company === '__all__') {
+        filterBtns.forEach(b => b.classList.add('active'));
+        document.querySelectorAll('#feed3-grid > div').forEach(w => {
+          w.querySelector('.card').classList.remove('card-hidden');
+        });
+        return;
+      }
+      btn.classList.toggle('active');
+      const allBtn = document.querySelector('.all-btn');
+      const companyBtns = Array.from(document.querySelectorAll('.filter-btn:not(.all-btn)'));
+      allBtn.classList.toggle('active', companyBtns.every(b => b.classList.contains('active')));
+      const active = new Set(
+        companyBtns.filter(b => b.classList.contains('active')).map(b => b.dataset.company)
+      );
+      document.querySelectorAll('#feed3-grid > div').forEach(w => {
+        w.querySelector('.card').classList.toggle('card-hidden', !active.has(w.dataset.company));
+      });
+    });
+  });
+</script>
+</body>
+</html>
